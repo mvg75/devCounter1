@@ -5,10 +5,10 @@
 <h2>Tool Versions:</h2>
 IDE-Version: µVision V5.36.0.0
 Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: 1 2, NICROSOFT, LIC=4ZLZX-HAY49-KUQ4L-0DT4V-YHSE5-UH8TN
+License Information: Serg Vlad, Nicrosoft, LIC=----
  
 Tool Versions:
-Toolchain:       MDK-ARM Professional  Version: 5.36.0.0
+Toolchain:       MDK-Lite  Version: 5.36.0.0
 Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 7 (build 960)
 Assembler:       Armasm.exe V5.06 update 7 (build 960)
@@ -21,7 +21,7 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
 Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
-C:\LEARN\stm32\1\maket_stm32\firmware\Keil\devCo.uvprojx
+C:\stm32learn\devCounter1\firmware\Keil\devCo.uvprojx
 Project File Date:  03/28/2023
 
 <h2>Output:</h2>
@@ -29,12 +29,12 @@ Project File Date:  03/28/2023
 Rebuild target 'Target 1'
 assembling startup_stm32f10x_ld.s...
 compiling main.c...
-compiling stm32f10x_rcc.c...
-compiling misc.c...
 compiling system_stm32f10x.c...
+compiling misc.c...
 compiling stm32f10x_gpio.c...
+compiling stm32f10x_rcc.c...
 linking...
-Program Size: Code=1124 RO-data=252 RW-data=0 ZI-data=1632  
+Program Size: Code=1452 RO-data=264 RW-data=0 ZI-data=1632  
 FromELF: creating hex file...
 ".\Objects\devCo.axf" - 0 Error(s), 0 Warning(s).
 
@@ -58,35 +58,35 @@ Package Vendor: Keil
 <h2>Collection of Component include folders:</h2>
   .\RTE\Device\STM32F103C6
   .\RTE\_Target_1
-  C:\Users\user\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include
-  C:\Users\user\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include
-  C:\Users\user\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\StdPeriph_Driver\inc
+  C:\Keil_5\pacz\ARM\CMSIS\5.9.0\CMSIS\Core\Include
+  C:\Keil_5\pacz\Keil\STM32F1xx_DFP\2.4.0\Device\Include
+  C:\Keil_5\pacz\Keil\STM32F1xx_DFP\2.4.0\Device\StdPeriph_Driver\inc
 
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:Startup:1.0.0
-      Include file:  RTE_Driver\Config\RTE_Device.h
-      Source file:   Device\Source\ARM\startup_stm32f10x_ld.s
-      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
       Source file:   Device\Source\system_stm32f10x.c
+      Source file:   Device\Source\ARM\startup_stm32f10x_ld.s
+      Include file:  RTE_Driver\Config\RTE_Device.h
+      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
 
    * Component: Keil::Device:StdPeriph Drivers:Framework:3.6.0
+      Include file:  Device\StdPeriph_Driver\templates\stm32f10x_it.h
+      Source file:   Device\StdPeriph_Driver\templates\stm32f10x_conf.h
+      Source file:   Device\StdPeriph_Driver\templates\stm32f10x_it.c
       Include file:  Device\StdPeriph_Driver\inc\misc.h
       Source file:   Device\StdPeriph_Driver\src\misc.c
-      Include file:  Device\StdPeriph_Driver\templates\stm32f10x_it.h
-      Source file:   Device\StdPeriph_Driver\templates\stm32f10x_it.c
-      Source file:   Device\StdPeriph_Driver\templates\stm32f10x_conf.h
 
    * Component: Keil::Device:StdPeriph Drivers:GPIO:3.6.0
-      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_gpio.h
       Source file:   Device\StdPeriph_Driver\src\stm32f10x_gpio.c
+      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_gpio.h
 
    * Component: Keil::Device:StdPeriph Drivers:RCC:3.6.0
-      Source file:   Device\StdPeriph_Driver\src\stm32f10x_rcc.c
       Include file:  Device\StdPeriph_Driver\inc\stm32f10x_rcc.h
-Build Time Elapsed:  00:00:01
+      Source file:   Device\StdPeriph_Driver\src\stm32f10x_rcc.c
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>
