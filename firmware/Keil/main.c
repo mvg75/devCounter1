@@ -1,10 +1,6 @@
-/*
-* This is an independent project of an individual developer. Dear PVS-Studio, please check it.
-* PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
-*/
 #include "stm32f10x.h"
-#include "stm32f10x_gpio.h"     // Файл с функциями управления ножками контроллера
-#include "stm32f10x_rcc.h"      // Управление тактированием
+//#include "stm32f10x_gpio.h"     // Файл с функциями управления ножками контроллера
+//#include "stm32f10x_rcc.h"      // Управление тактированием
 #include "stdint.h"             // Правильные типы данных, вместо всяких int, char и тому подобных
 
 
@@ -13,74 +9,41 @@
 
 
 // Примитивнейшая функция задержки
-// Для орагнизации задержек (или периодических событий)
-// обычно применяются таймеры, но нам пока рано, так что
-// тупо мотаем такты
 
 void Delay( void )
 {
-    uint16_t i,j;
-    for( i = 0; i <= 50000; i++ )
+    uint32_t i,j;
+    for( i = 0; i <= 250000; i++ )
         for( j = 0; j <= 5; j++ );
 }
-//
-
-// точна входа в программу, всегда именно "int main ( void )"
 int main( void )
 {
+    GPIO_InitTypeDef ldPort;    // переменная с характеристиками порта
     
-    // ---------------- Включаем тактирование порта GPIOC
-    // 1. С использованием SPL
-   // RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC, ENABLE );  
-    
-    // 2. С использованием CMSIS, магические числа
-    RCC->APB2ENR |= (1 << 4);                       // см 146 стр. 
-    // ---------------- 
-    
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC, ENABLE );  // ---------------- Включаем тактирование порта GPIOC
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOA, ENABLE );  // ---------------- Включаем тактирование порта GPIOA
+    // конфигурим порт с  
 
     
-    // ---------------- Инициализируем ногу со светодиодом (PC13 - Порт С нога 13)    
-    // 1. С использованием SPL
-  /*  GPIO_InitTypeDef PortC;                     // Структура с необходимыми полями
-    PortC.GPIO_Mode         = GPIO_Mode_Out_PP;     // Выход пуш-пул, см 164 стр.
-    PortC.GPIO_Speed        = GPIO_Speed_10MHz;     // По сути это ток который сможет обеспечить вывод
-    PortC.GPIO_Pin          = GPIO_Pin_13;          // Номер ноги
-    GPIO_Init(GPIOC, &PortC);                       // Применяем настройки
-    */
-    // 2. С использованием CMSIS
-    GPIOC->CRH |= (0x00 << 22) | (0x01 << 20);      // см 172 стр. 
-    // ---------------- 
+    ldPort.GPIO_Mode         = GPIO_Mode_Out_PP;     // Выход пуш-пул, см 164 стр.
+    ldPort.GPIO_Speed        = GPIO_Speed_10MHz;     // По сути это ток который сможет обеспечить вывод
+    ldPort.GPIO_Pin          = GPIO_Pin_13;          // Номер ноги
+    GPIO_Init(GPIOC, &ldPort);                       // Применяем настройки
+    //  конфигурим порт А
+    ldPort.GPIO_Mode         = GPIO_Mode_Out_PP;
+    ldPort.GPIO_Speed        = GPIO_Speed_10MHz;
+    ldPort.GPIO_Pin          = GPIO_Pin_7;    
+    GPIO_Init(GPIOA, &ldPort);                
     
-    
-    
-    // Основной цикл, программа ВСЕГДА должна зацикливаться!!!
-    // Не всегда наполнен чем-то вразумительным, иногда может быть пустым, 
-    // например когда вся логика реализована в прерываниях.
-    while( 1 )
+      while( 1 )
     {
-        // ---------------- Устанавливае ногу со светодиодом (PC13 - Порт С нога 13)
-        // 1. С использованием SPL
-//        GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_SET);     
-        // 2. С использованием CMSIS и ODR регистра, см 173 стр.
-//        GPIOC->ODR |= (1 << 13);                     
-        // 3. C использованием CMSIS и BSRR регистра, см 173 стр.
-        GPIOC->BSRR = (1 << 13);                        
-        // ---------------- 
-        
-        Delay();
-        
-        // ---------------- Сбрасываем ногу со светодиодом (PC13 - Порт С нога 13)
-        // 1. С использованием SPL
-//        GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET);   
-        // 2. С использованием CMSIS и ODR регистра, см 173 стр.
-//        GPIOC->ODR &= ~(1 << 13);                       
-        // 3. С использованием CMSIS и BRR регистра , см 174 стр.
-//        GPIOC->BRR = (1 << 13);         
-        // 4. С использованием CMSIS и BSRR регистра , см 173 стр.
-        GPIOC->BSRR = (1 << 29);                 
-        // ---------------- 
-        
-        Delay();        
+  
+       GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_SET);     
+       GPIO_WriteBit(GPIOA, GPIO_Pin_7, Bit_SET);             
+       Delay();
+       GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET);
+       GPIO_WriteBit(GPIOA, GPIO_Pin_7, Bit_RESET);                
+       Delay();        
     }
 }
-// В конце файла для Кейла обязательна пустая строка! Хз зачем, просто нужна.
+

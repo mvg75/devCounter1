@@ -1,0 +1,11 @@
+--cpu Cortex-M3
+".\objects\main.o"
+".\objects\misc_1.o"
+".\objects\stm32f10x_gpio_1.o"
+".\objects\stm32f10x_rcc_1.o"
+".\objects\startup_stm32f10x_ld.o"
+".\objects\system_stm32f10x.o"
+--strict --scatter ".\Objects\devCounter.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\devCounter.map" -o .\Objects\devCounter.axf
