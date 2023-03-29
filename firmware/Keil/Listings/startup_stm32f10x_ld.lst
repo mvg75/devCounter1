@@ -452,18 +452,19 @@ ARM Macro Assembler    Page 7
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=.\objects\startup_stm32f10x_ld.d -o.\objects\startup_stm32f10x_ld.
-o -I.\RTE\Device\STM32F103C6 -I.\RTE\_Target_1 -IC:\Keil_5\pacz\ARM\CMSIS\5.9.0
+o -I.\RTE\Device\STM32F103C6 -I.\RTE\_Target_1 -IC:\Users\user\AppData\Local\Ar
 
 
 
 ARM Macro Assembler    Page 8 
 
 
-\CMSIS\Core\Include -IC:\Keil_5\pacz\Keil\STM32F1xx_DFP\2.4.0\Device\Include -I
-C:\Keil_5\pacz\Keil\STM32F1xx_DFP\2.4.0\Device\StdPeriph_Driver\inc --predefine
-="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 536" --predefine="_RTE_ SE
-TA 1" --predefine="STM32F10X_LD SETA 1" --predefine="_RTE_ SETA 1" --list=.\lis
-tings\startup_stm32f10x_ld.lst RTE\Device\STM32F103C6\startup_stm32f10x_ld.s
+m\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include -IC:\Users\user\AppData\Local\Arm\Pa
+cks\Keil\STM32F1xx_DFP\2.4.0\Device\Include -IC:\Users\user\AppData\Local\Arm\P
+acks\Keil\STM32F1xx_DFP\2.4.0\Device\StdPeriph_Driver\inc --predefine="__UVISIO
+N_VERSION SETA 536" --predefine="_RTE_ SETA 1" --predefine="STM32F10X_LD SETA 1
+" --predefine="_RTE_ SETA 1" --list=.\listings\startup_stm32f10x_ld.lst RTE\Dev
+ice\STM32F103C6\startup_stm32f10x_ld.s
 
 
 
@@ -1138,4 +1139,4 @@ Symbol: __use_two_region_memory
       None
 Comment: __use_two_region_memory unused
 3 symbols
-405 symbols in table
+404 symbols in table

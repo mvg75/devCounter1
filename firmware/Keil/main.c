@@ -13,7 +13,7 @@ const uint8_t zg[]= {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x0};//з
 void Delay( void )
 {
     uint32_t i,j;
-    for( i = 0; i <= 5000; i++ )
+    for( i = 0; i <= 500; i++ ) //50000
         for( j = 0; j <= 5; j++ );
 }
 void setSegment(uint8_t segm) // вывод символа в текущий сегмент
@@ -32,7 +32,8 @@ if (segm & 64) {GPIO_WriteBit(GPIOA, GPIO_Pin_6, Bit_SET);} else {GPIO_WriteBit(
 int main( void )
 {   uint8_t count = 0;
     GPIO_InitTypeDef ldPort;    // переменная с характеристиками порта
-    
+    uint8_t digs[4] = {10,10,10,10};// 10 - "пусто" на индикаторе
+    uint16_t value,tempValue;
     RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC, ENABLE );  // ---------------- Включаем тактирование порта GPIOC
     RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOA, ENABLE );  // ---------------- Включаем тактирование порта GPIOA
     RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOB, ENABLE );  // ---------------- Включаем тактирование порта GPIOB
@@ -54,18 +55,32 @@ int main( void )
     ldPort.GPIO_Speed        = GPIO_Speed_10MHz;
     ldPort.GPIO_Pin          = GPIO_Pin_15 | GPIO_Pin_14 | GPIO_Pin_13 | GPIO_Pin_12;    
     GPIO_Init(GPIOB, &ldPort);                
-// off lcd	
+
+/*
+// all digits off	
 GPIO_WriteBit(GPIOB, GPIO_Pin_12, Bit_SET); 
 GPIO_WriteBit(GPIOB, GPIO_Pin_13, Bit_SET); 
 GPIO_WriteBit(GPIOB, GPIO_Pin_14, Bit_SET); 
 GPIO_WriteBit(GPIOB, GPIO_Pin_15, Bit_SET); 			
 
 setSegment(0); // вывод символа в текущий сегмент
-//digit1 on
+//digit 1 on
 GPIO_WriteBit(GPIOB, GPIO_Pin_12, Bit_RESET); 
-
-
-      while( 1 )
+*/    
+    value = 0;  
+            // выделение  тысяч
+    digs[0] = value / 1000;
+    tempValue = value - digs[0] * 1000;
+    // выделение сотен
+    digs[1] =  tempValue / 100;
+    tempValue -=digs[1] * 100;    
+    // выделение десятков
+    digs[2] = tempValue / 10;
+    tempValue -=digs[2] * 10;    
+    // выделение единиц
+    digs[3] = (uint8_t) tempValue;
+    
+    while( 1 )
     {
 
 
@@ -75,9 +90,36 @@ GPIO_WriteBit(GPIOB, GPIO_Pin_12, Bit_RESET);
        GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET);
        GPIO_WriteBit(GPIOA, GPIO_Pin_7, Bit_RESET);                
        Delay();        
-			setSegment(count); // вывод символа в текущий сегмент
-			count++;
-			if (count>9) {count = 0;};
+        
+// all digits off	
+GPIO_WriteBit(GPIOB, GPIO_Pin_12, Bit_SET); 
+GPIO_WriteBit(GPIOB, GPIO_Pin_13, Bit_SET); 
+GPIO_WriteBit(GPIOB, GPIO_Pin_14, Bit_SET); 
+GPIO_WriteBit(GPIOB, GPIO_Pin_15, Bit_SET); 			
+        
+			setSegment(digs[count]); // вывод символа в текущий сегмент
+            if (count==0 ) {//digit 1 on
+                GPIO_WriteBit(GPIOB, GPIO_Pin_12, Bit_RESET);};
+            if (count==1 ) {//digit 2 on
+                GPIO_WriteBit(GPIOB, GPIO_Pin_13, Bit_RESET);};
+            if (count==2 ) {//digit 3 on
+                GPIO_WriteBit(GPIOB, GPIO_Pin_14, Bit_RESET);};
+            if (count==3 ) {//digit 4 on
+                GPIO_WriteBit(GPIOB, GPIO_Pin_15, Bit_RESET);};
+            count++;
+			if (count>3) {count = 0;value++;
+                // выделение  тысяч
+    digs[0] = value / 1000;
+    tempValue = value - digs[0] * 1000;
+    // выделение сотен
+    digs[1] =  tempValue / 100;
+    tempValue -=digs[1] * 100;    
+    // выделение десятков
+    digs[2] = tempValue / 10;
+    tempValue -=digs[2] * 10;    
+    // выделение единиц
+    digs[3] = (uint8_t) tempValue;
+            };
     }
 }
 
