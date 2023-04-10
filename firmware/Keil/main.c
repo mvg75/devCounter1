@@ -1,6 +1,7 @@
 #include "stm32f10x.h"
 //#include "stm32f10x_gpio.h"     // Файл с функциями управления ножками контроллера
 //#include "stm32f10x_rcc.h"      // Управление тактированием
+//#include "stm32f10x_usart.h"
 #include "stdint.h"             // Правильные типы данных, вместо всяких int, char и тому подобных
 
 
@@ -70,12 +71,13 @@ int main( void )
 {   uint8_t keyRrattling;
     GPIO_InitTypeDef ldPort;    // переменная с характеристиками порта индикатора
     GPIO_InitTypeDef keyPort;    // переменная с характеристиками порта кнопок
-    
+    GPIO_InitTypeDef usart1;    // переменная с характеристиками ком порта
+   // USART_InitTypeDef USART_InitStructure;
     uint16_t value,tempValue;
     RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC, ENABLE );  // ---------------- Включаем тактирование порта GPIOC
     RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOA, ENABLE );  // ---------------- Включаем тактирование порта GPIOA
     RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOB, ENABLE );  // ---------------- Включаем тактирование порта GPIOB
-
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_USART1,ENABLE);   //  ---------------- Включаем тактирование порта usart3
 	// конфигурим порт с  
 
     
@@ -96,11 +98,31 @@ int main( void )
    
     //  конфигурим порт B.кнопки	  
 		keyPort.GPIO_Mode         = GPIO_Mode_IPU;
-    keyPort.GPIO_Speed        = GPIO_Speed_2MHz;
+    keyPort.GPIO_Speed        = GPIO_Speed_10MHz;
     keyPort.GPIO_Pin          = GPIO_Pin_6; 
     GPIO_Init(GPIOB, &keyPort);  
-    
-    
+    // usart
+//Configure GPIO pin 
+usart1.GPIO_Speed = GPIO_Speed_2MHz;
+usart1.GPIO_Pin = GPIO_Pin_9;	//	Tx
+usart1.GPIO_Mode = GPIO_Mode_AF_PP;
+GPIO_Init(GPIOA, &usart1);
+usart1.GPIO_Pin = GPIO_Pin_10;	//	Rx
+usart1.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+GPIO_Init(GPIOA, &usart1);    
+/*
+USART_InitStructure.USART_BaudRate = 9600;
+USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+USART_InitStructure.USART_StopBits = USART_StopBits_1;
+USART_InitStructure.USART_Parity = USART_Parity_No;
+USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+USART_Init(USART1, &USART_InitStructure);*/
+//USART_Init(USART1, &USART_InitStructure);
+//USART_Cmd(USART1, ENABLE);
+
+    //GPIO_PinAFConfig(GPIOA, GPIOA_PibSource11,AF_USART3);
+    //GPIO_PinAFConfig(GPIOA, GPIOA_PibSource11,AF_USART3);
     //конфигурация системного таймера
     SysTick_Config(SystemCoreClock/1000); //интервал 1мкс
 /*
@@ -154,6 +176,8 @@ GPIO_WriteBit(GPIOB, GPIO_Pin_12, Bit_RESET);
     if (digs[0]==0) {digs[0]=10;};//х1000
     if ((digs[1]==0) && (digs[0]==10) ){digs[1]=10;};//х100
     if ((digs[2]==0) && (digs[1]==10) ){digs[2]=10;};//х10
+   
+    // !!!!! переделать, не держать обработку в опросе, возможно разнести на 2 части
     //ожидание устойчивой 1
     wait1:keyRrattling = 100;
     while (keyRrattling>0) 

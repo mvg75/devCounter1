@@ -1,0 +1,101 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.h
+  * @brief          : Header for main.c file.
+  *                   This file contains the common defines of the application.
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2023 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __MAIN_H
+#define __MAIN_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Includes ------------------------------------------------------------------*/
+#include "stm32f1xx_hal.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+
+/* USER CODE END Includes */
+
+/* Exported types ------------------------------------------------------------*/
+/* USER CODE BEGIN ET */
+
+/* USER CODE END ET */
+
+/* Exported constants --------------------------------------------------------*/
+/* USER CODE BEGIN EC */
+
+/* USER CODE END EC */
+
+/* Exported macro ------------------------------------------------------------*/
+/* USER CODE BEGIN EM */
+
+/* USER CODE END EM */
+
+/* Exported functions prototypes ---------------------------------------------*/
+void Error_Handler(void);
+
+/* USER CODE BEGIN EFP */
+
+/* USER CODE END EFP */
+//void setSegment(uint8_t segm); // вывод символа в текущий сегмент
+/* Private defines -----------------------------------------------------------*/
+#define inLed_Pin GPIO_PIN_13
+#define inLed_GPIO_Port GPIOC
+#define digA_Pin GPIO_PIN_0
+#define digA_GPIO_Port GPIOA
+#define digB_Pin GPIO_PIN_1
+#define digB_GPIO_Port GPIOA
+#define digC_Pin GPIO_PIN_2
+#define digC_GPIO_Port GPIOA
+#define digD_Pin GPIO_PIN_3
+#define digD_GPIO_Port GPIOA
+#define digE_Pin GPIO_PIN_4
+#define digE_GPIO_Port GPIOA
+#define digF_Pin GPIO_PIN_5
+#define digF_GPIO_Port GPIOA
+#define digG_Pin GPIO_PIN_6
+#define digG_GPIO_Port GPIOA
+#define modeLed_Pin GPIO_PIN_7
+#define modeLed_GPIO_Port GPIOA
+#define addr1_Pin GPIO_PIN_12
+#define addr1_GPIO_Port GPIOB
+#define addr2_Pin GPIO_PIN_13
+#define addr2_GPIO_Port GPIOB
+#define addr3_Pin GPIO_PIN_14
+#define addr3_GPIO_Port GPIOB
+#define addr4_Pin GPIO_PIN_15
+#define addr4_GPIO_Port GPIOB
+#define usartTX1_Pin GPIO_PIN_9
+#define usartTX1_GPIO_Port GPIOA
+#define usartRX1_Pin GPIO_PIN_10
+#define usartRX1_GPIO_Port GPIOA
+#define SW1_Pin GPIO_PIN_6
+#define SW1_GPIO_Port GPIOB
+
+/* USER CODE BEGIN Private defines */
+
+/* USER CODE END Private defines */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __MAIN_H */

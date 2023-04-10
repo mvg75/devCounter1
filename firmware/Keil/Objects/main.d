@@ -9,6 +9,6 @@
 .\objects\main.o: .\RTE\Device\STM32F103C6\stm32f10x_conf.h
 .\objects\main.o: .\RTE\_Target_1\RTE_Components.h
 .\objects\main.o: .\standartLibs\STL\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h
-.\objects\main.o: C:\Users\user\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include\stm32f10x.h
+.\objects\main.o: ..\Keil\stm32f10x.h
 .\objects\main.o: .\standartLibs\STL\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h
 .\objects\main.o: .\standartLibs\STL\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h

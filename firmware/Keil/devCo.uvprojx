@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\standartLibs\CMSIS\Inc;.\standartLibs\CMSIS\Src;.\standartLibs\STL\Libraries\STM32F10x_StdPeriph_Driver\inc;.\standartLibs\STL\Libraries\STM32F10x_StdPeriph_Driver\src</IncludePath>
+              <IncludePath>.\standartLibs\CMSIS\Inc;.\standartLibs\CMSIS\Src;.\standartLibs\STL\Libraries\STM32F10x_StdPeriph_Driver\inc;.\standartLibs\STL\Libraries\STM32F10x_StdPeriph_Driver\src;..\Keil</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

@@ -1,0 +1,24 @@
+--cpu Cortex-M3
+"mx_k\startup_stm32f103x6.o"
+"mx_k\main.o"
+"mx_k\stm32f1xx_it.o"
+"mx_k\stm32f1xx_hal_msp.o"
+"mx_k\stm32f1xx_hal_gpio_ex.o"
+"mx_k\stm32f1xx_hal_tim.o"
+"mx_k\stm32f1xx_hal_tim_ex.o"
+"mx_k\stm32f1xx_hal_uart.o"
+"mx_k\stm32f1xx_hal.o"
+"mx_k\stm32f1xx_hal_rcc.o"
+"mx_k\stm32f1xx_hal_rcc_ex.o"
+"mx_k\stm32f1xx_hal_gpio.o"
+"mx_k\stm32f1xx_hal_dma.o"
+"mx_k\stm32f1xx_hal_cortex.o"
+"mx_k\stm32f1xx_hal_pwr.o"
+"mx_k\stm32f1xx_hal_flash.o"
+"mx_k\stm32f1xx_hal_flash_ex.o"
+"mx_k\stm32f1xx_hal_exti.o"
+"mx_k\system_stm32f1xx.o"
+--strict --scatter "mx_k\mx_k.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "mx_k.map" -o mx_k\mx_k.axf
